@@ -1,5 +1,5 @@
 import './App.css';
-window.Telegram.WebApp
+//window.Telegram.WebApp
 function App() {
   return (
     <div className="App">
