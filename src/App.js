@@ -1,14 +1,26 @@
 import './App.css';
+import React, { useState } from 'react';
 window.Telegram.WebApp
 function App() {
-  // Обработчик нажатия на кнопку
-  const handleButtonClick = () => {
-    alert("Расклад из трёх выполнен!");
+  const [runes, setRunes] = useState([]);
+
+  const handleButtonClick = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      const data = await response.json();
+      setRunes(data.runes); // Сохраняем руны в состоянии
+    } catch (error) {
+      console.error('Ошибка при генерации расклада:', error);
+    }
   };
 
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
-      <h1>Добро пожаловать!</h1>
+      <h1>Расклад на рунах</h1>
       <button 
         onClick={handleButtonClick} 
         style={{
@@ -18,14 +30,27 @@ function App() {
           color: 'white',
           border: 'none',
           borderRadius: '5px',
-          cursor: 'pointer'
+          cursor: 'pointer',
         }}
       >
-        Сделать расклад из трёх
+        Сделать расклад из трёх рун
       </button>
+      <div style={{ marginTop: '20px' }}>
+        {runes.length > 0 && (
+          <div>
+            <h2>Ваш расклад:</h2>
+            <ul>
+              {runes.map((rune, index) => (
+                <li key={index} style={{ marginBottom: '10px' }}>{rune}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
+
 
 
 export default App;
