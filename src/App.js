@@ -6,7 +6,7 @@ function App() {
 
   const handleButtonClick = async () => {
     try {
-      const response = await fetch('http://localhost:8000/generate', {
+      const response = await fetch('https://a1ad-86-62-14-120.ngrok-free.app', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
       });
