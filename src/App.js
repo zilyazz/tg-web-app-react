@@ -8,7 +8,7 @@ function App() {
 
   const handleButtonClick = async () => {
     try {
-      const response = await fetch('https://choosing-generator-deal-authorities.trycloudflare.com/generate', {
+      const response = await fetch('https://indianapolis-pal-loose-mount.trycloudflare.com/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
       });
