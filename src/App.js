@@ -1,18 +1,20 @@
-import './App.css';
 import React, { useState } from 'react';
-window.Telegram.WebApp
+import './App.css';
+
+window.Telegram.WebApp.initEnv();
+
 function App() {
-  const [runes, setRunes] = useState([]);
+  const [runes, setRunes] = useState([]); // Хранит текущий расклад
 
   const handleButtonClick = async () => {
     try {
-      const response = await fetch('https://treating-performance-useful-newark.trycloudflare.com/generate', {
+      const response = await fetch('https://choosing-generator-deal-authorities.trycloudflare.com/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
       });
 
       const data = await response.json();
-      setRunes(data.runes); // Сохраняем руны в состоянии
+      setRunes(data); // Сохраняем полученный расклад
     } catch (error) {
       console.error('Ошибка при генерации расклада:', error);
     }
@@ -21,8 +23,8 @@ function App() {
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
       <h1>Расклад на рунах</h1>
-      <button 
-        onClick={handleButtonClick} 
+      <button
+        onClick={handleButtonClick}
         style={{
           fontSize: '20px',
           padding: '10px 20px',
@@ -33,24 +35,26 @@ function App() {
           cursor: 'pointer',
         }}
       >
-        Сделать расклад из трёх рун
+        Сделать расклад из пяти рун
       </button>
       <div style={{ marginTop: '20px' }}>
         {runes.length > 0 && (
           <div>
             <h2>Ваш расклад:</h2>
-            <ul>
+            <ol>
               {runes.map((rune, index) => (
-                <li key={index} style={{ marginBottom: '10px' }}>{rune}</li>
+                <li key={index} style={{ marginBottom: '10px' }}>
+                  <strong>Позиция {index + 1}:</strong> {rune.rune} ({rune.state})
+                  <br />
+                  Значение: {rune.value}
+                </li>
               ))}
-            </ul>
+            </ol>
           </div>
         )}
       </div>
     </div>
   );
 }
-
-
 
 export default App;
