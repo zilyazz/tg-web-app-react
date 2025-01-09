@@ -6,7 +6,7 @@ function App() {
 
   const handleButtonClick = async () => {
     try {
-      const response = await fetch(' https://cyan-socks-live.loca.lt/generate', {
+      const response = await fetch('https://treating-performance-useful-newark.trycloudflare.com/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
       });
